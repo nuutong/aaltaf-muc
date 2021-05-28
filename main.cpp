@@ -14,6 +14,11 @@ using namespace aalta;
 
 void get_muc(aalta_formula* af){
   if(af->is_global ()){
+	  cout<<"global"<<endl;
+	  //af = af->xnf ();
+	  //MUCsolver m (af);
+	  //vector<aalta_formula*> res = m->muc ();
+     //pirnt res
 	  /*TO BE DONE
         af->ofg();
         return MUSER2(af);
@@ -23,6 +28,7 @@ void get_muc(aalta_formula* af){
 		vector<aalta_formula*> S,MUC;
 		S.push_back(af);
 		muc(S, MUC, false);
+		cout<<"MUC:"<<endl;
 		for(int i=0;i<MUC.size();i++){
 			cout<<MUC[i]->to_string()<<endl;
 		}
@@ -147,7 +153,7 @@ get_muc(af);
 
 
   aalta_formula::destroy();
-  system ("rm cnf.dimacs*");
+  system ("rm -f  cnf.dimacs*");
 }
 
 

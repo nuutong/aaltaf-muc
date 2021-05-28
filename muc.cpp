@@ -120,16 +120,18 @@ void muc(vector<aalta_formula *> &S, vector<aalta_formula *> &MUC, bool UCEable)
             {
                 if (UCEable)
                 {
-                    /* TO BE DONE
-                vector<aalta_formula*> UC;
-                UC=get_uc(*it);
-                items.clear();
+
+                    /*TO BE DONE
+                    BooleanSATSolver s (items, 0);
+                    assert (!s->SAT()); //guaranteed by !sat(items)
+                    vector<aalta_formula*> UC = s->getUC ();
+                 items.clear();
                 items.insert(items.end(),UC.begin(),UC.end());
                  items.insert(items.end(),S.begin(),S.end());
                  items.insert(items.end(),MUC.begin(),MUC.end());
                
                  if(!sat(items)){
-                    S.push_back(construct_and(UC));
+                    S.push_back(constructAnd(UC));
                  }
                 else{
                     S.push_back(*it);
@@ -148,41 +150,44 @@ void muc(vector<aalta_formula *> &S, vector<aalta_formula *> &MUC, bool UCEable)
     //if both parts of P contain an MUC element
     if (!flag)
     {  
-        for (auto  it = P.begin(); it != P.end(); ++it)
-        {
-            vector<aalta_formula *> tmpP = binaryPartition(*it);
+        for(int i=0;i<2;++i){
+            vector<aalta_formula *> tmpP = binaryPartition(P[i]);
             if (tmpP.empty())
             {
-                MUC.push_back(*it);
+                MUC.push_back(P[i]);
             }
-            else
+             else
             {
                 if (UCEable)
                 {
+                    items.clear();
+                    items.push_back(P[i]);
+                    items.push_back(P[(i+1)%2]);
+                    items.insert(items.end(),MUC.begin(),MUC.end());
+                    items.insert(items.end(),S.begin(),S.end());
+                    //BooleanSATSolver s (items, 0);
+                   // assert (!s->SAT()); //guaranteed by !sat(items)
+                   // vector<aalta_formula*> UC = s->getUC ();
                     /* TO BE DONE
-                     UC=get_uc(*((it+1)%2));
                     items.clear();
                     items.insert(items.end(),UC.begin(),UC.end());
                     items.insert(items.end(),S.begin(),S.end());
-                    items.push_back(*((it+1)%2));
+                    items.push_back(P[(i+1)%2]);
                     if(!sat(items)){
-                        S.push_back(construct_and(UC));
+                        S.push_back(constructAnd(UC));
                     }
                     else{
-                        S.push_back(*it);
+                        S.push_back(P[i]);
                     }
                     */
                 }
                 else
                 {
-                    S.push_back(*it);
+                    S.push_back(P[i]);
                 }
             }
-        //        cout<<MUC.size()<<endl;
-        // cout<<S.size()<<endl;
+        }
         }
         muc(S, MUC, UCEable);
     }
-}
-
 }
