@@ -5,7 +5,7 @@ PARSERFILES  =	ltlparser/ltl_formula.c ltlparser/ltllexer.c ltlparser/ltlparser.
 
 UTILFILES    =	util/utility.cpp utility.cpp
 
-SOLVER		= minisat/core/Solver.cc aaltasolver.cpp solver.cpp carsolver.cpp 
+SOLVER		= minisat/core/Solver.cc aaltasolver.cpp solver.cpp carsolver.cpp  msolver.cpp
 
 CHECKING	= ltlfchecker.cpp carchecker.cpp  
 
@@ -16,8 +16,8 @@ ALLFILES     =	$(CHECKING) $(SOLVER) $(FORMULAFILES) $(PARSERFILES) $(UTILFILES)
 
 
 CC	    =   g++
-FLAG    = -I./  -I./minisat/  -D __STDC_LIMIT_MACROS -D __STDC_FORMAT_MACROS 
-DEBUGFLAG   =	-D DEBUG -g -pg
+FLAG    = -I./  -I./minisat/  -D __STDC_LIMIT_MACROS -D __STDC_FORMAT_MACROS -fpermissive
+DEBUGFLAG   =	-D DEBUG -g 
 RELEASEFLAG =	-O2 
 
 aaltaf :	release

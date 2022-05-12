@@ -52,6 +52,12 @@
         "cinttypes": "cpp",
         "random": "cpp",
         "typeinfo": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "functional": "cpp",
+        "numeric": "cpp",
+        "slist": "cpp",
+        "iomanip": "cpp"
     }
 }
