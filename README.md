@@ -56,4 +56,5 @@ We have checked the correctness of the MUC obtained by each formula in the bench
 
 The terminal will output "MUC is right" if the obtained MUC is correct.
 
-
+## Reproduce Experimental Results
+If you want to view the experimental dataset or reproduce the experiment, please visit https://github.com/nuutong/supplemental_material.
