@@ -585,6 +585,9 @@ olg_item::SATCall ()
   Minisat::Solver S;
   Minisat::parse_DIMACS(in, S);
   gzclose(in);
+  string cmd = "rm -r " + cnffile;
+  system (cmd.c_str());
+
   if (!S.simplify())
   {
     return false;

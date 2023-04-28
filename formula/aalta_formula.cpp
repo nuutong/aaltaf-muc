@@ -2289,6 +2289,92 @@ aalta_formula::flatted ()
   return result;
 }
 
+
+aalta_formula* 
+aalta_formula::xnf ()
+{
+  aalta_formula *result, *l, *r, *nx;
+  switch (oper ())
+  {
+    case Until:
+      l = _right->xnf ();
+        
+      r = _left->xnf ();
+
+      nx = aalta_formula (Next, NULL, this).unique ();
+      if (r != FALSE ()){
+        if (r != TRUE ())
+        	r = aalta_formula (And, r, nx).unique ();
+        else 
+        	r = nx;
+      }
+        
+      if (l == TRUE ())
+        result = l;
+      else if (l == FALSE ())
+        result = r;
+      else if (r == TRUE ())
+        result = r;
+      else if (r == FALSE ())
+        result = l;
+      else
+        result = aalta_formula (Or, r, l).unique ();
+      break;
+      
+    case Release:
+      l = _right->xnf ();
+      r = _left->xnf ();
+      nx = aalta_formula (Next, NULL, this).unique ();
+      if (r == FALSE ())
+        r = nx;
+      else if (r != TRUE ())
+        r = aalta_formula (Or, r, nx).unique ();
+        
+      if (l == TRUE ())
+        result = r;
+      else if (l == FALSE ())
+        result = l;
+      else if (r == TRUE ())
+        result = l;
+      else if (r == FALSE ())
+        result = r;
+      else
+        result = aalta_formula (And, l, r).unique ();
+      break;
+    case And:
+      l = _right->xnf ();
+      r = _left->xnf ();
+      if (l == TRUE ())
+        result = r;
+      else if (l == FALSE ())
+        result = l;
+      else if (r == TRUE ())
+        result = l;
+      else if (r == FALSE ())
+        result = r;
+      else
+        result = aalta_formula (And, l, r).unique ();
+      break;
+    case Or:
+      l = _right->xnf ();
+      r = _left->xnf ();
+      if (l == TRUE ())
+        result = l;
+      else if (l == FALSE ())
+        result = r;
+      else if (r == TRUE ())
+        result = r;
+      else if (r == FALSE ())
+        result = l;
+      else
+        result = aalta_formula (Or, r, l).unique ();
+      break;
+    default:
+      result = this;
+  }
+  return result;
+}
+
 bool 
 aalta_formula::contain (af_prt_set P1, af_prt_set P2)
 {

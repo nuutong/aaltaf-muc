@@ -308,6 +308,7 @@ public:
   aalta_formula* normal ();
   bool is_until_marked ();
   aalta_formula* flatted ();
+  aalta_formula* xnf ();
   static hash_map<aalta_formula*, aalta_formula *, af_prt_hash> _until_map;
   static hash_map<aalta_formula*, aalta_formula *, af_prt_hash> _var_until_map;
   static void print_all_formulas ();
